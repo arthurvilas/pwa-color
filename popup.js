@@ -17,6 +17,23 @@ document.addEventListener('DOMContentLoaded', () => {
       currentUrl = new URL(tabs[0].url).origin;
       currentTabId = tabs[0].id;
 
+      // Test if is in a restricted URL
+      if (
+        currentUrl.includes('chrome://') ||
+        currentUrl.includes('file://') ||
+        currentUrl.includes('chrome.google.com/webstore')
+      ) {
+        showStatus(
+          'This extension does not work on Chrome internal pages, local files, or the Chrome Web Store.',
+          'error',
+          false
+        );
+        saveBtn.disabled = true;
+        removeBtn.disabled = true;
+        colorPicker.disabled = true;
+        return;
+      }
+
       chrome.storage.sync.get([currentUrl], (result) => {
         if (result[currentUrl]) {
           colorPicker.value = result[currentUrl];
@@ -52,6 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
       (response) => {
         if (chrome.runtime.lastError) {
           showStatus('Error applying color', 'error');
+          console.error(chrome.runtime.lastError);
           return;
         }
         if (response && response.status === 'COLOR_APPLIED') {
@@ -83,6 +101,11 @@ document.addEventListener('DOMContentLoaded', () => {
       );
       updatePwaStatus(false);
       removeBtn.disabled = true;
+
+      // Reset color picker
+      colorPicker.value = '#3b82f6';
+      colorValue.textContent = '#3B82F6';
+
       statusText.textContent = 'Reload the page';
     });
   });
@@ -112,11 +135,13 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Show status message
-  function showStatus(message, type) {
+  function showStatus(message, type, temporary = true) {
     status.textContent = message;
     status.className = `status show ${type}`;
-    setTimeout(() => {
-      status.classList.remove('show');
-    }, 3000);
+    if (temporary) {
+      setTimeout(() => {
+        status.classList.remove('show');
+      }, 3000);
+    }
   }
 });
