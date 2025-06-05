@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>PWA Color</title>
+    <link rel="stylesheet" type="text/css" href="popup.css" />
+  </head>
+  <body>
+    <body>
+      <div class="container">
+        <div class="header">
+          <div class="logo">
+            <img
+              src="./images/palette.svg"
+              alt="PWA Color Logo"
+              style="height: 32px; width: 32px"
+            />
+          </div>
+          <div class="title">PWA Theme</div>
+          <div class="subtitle">Customize your PWA colors</div>
+        </div>
+
+        <div class="pwa-status" id="pwaStatus">
+          <div class="status-dot" id="statusDot"></div>
+          <span id="statusText">Checking theme status...</span>
+        </div>
+
+        <div class="form-group">
+          <label class="label" for="colorPicker">Theme Color</label>
+          <div class="color-picker-container">
+            <input
+              type="color"
+              id="colorPicker"
+              class="color-picker"
+              value="#3b82f6"
+            />
+            <div class="color-value" id="colorValue">#3b82f6</div>
+          </div>
+        </div>
+
+        <div class="button-group">
+          <button class="btn btn-save" id="saveBtn">Set Color</button>
+          <button class="btn btn-remove" id="removeBtn">Remove</button>
+        </div>
+
+        <div class="status" id="status"></div>
+      </div>
+    </body>
+    <script src="popup.js"></script>
+  </body>
+</html>

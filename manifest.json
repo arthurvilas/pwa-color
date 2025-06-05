@@ -1,0 +1,34 @@
+{
+  "manifest_version": 3,
+  "name": "PWA Theme Color Changer",
+  "version": "1.0",
+  "description": "Changes the title bar color of specified PWAs.",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "images/palette-round16.png",
+      "48": "images/palette-round48.png",
+      "128": "images/palette-round128.png"
+    }
+  },
+  "icons": {
+    "16": "images/palette-round16.png",
+    "48": "images/palette-round48.png",
+    "128": "images/palette-round128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content.js"
+      ]
+    }
+  ]
+}
