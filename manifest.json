@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "PWA Task Bar Color",
-  "version": "1.0",
-  "description": "Changes the title bar color of installed web apps",
+  "version": "1.0.0",
+  "description": "Change the title bar color of installed web apps",
   "permissions": [
     "storage",
     "activeTab",
